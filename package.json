@@ -1,0 +1,22 @@
+{
+  "name": "clear-sky-app",
+  "version": "1.0.0",
+  "description": "An interactive app for checking astronomical observing conditions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clairefreehafer/clear-sky-app.git"
+  },
+  "author": "Claire Freehafer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clairefreehafer/clear-sky-app/issues"
+  },
+  "homepage": "https://github.com/clairefreehafer/clear-sky-app#readme",
+  "dependencies": {
+    "request-promise": "^4.1.1"
+  }
+}
