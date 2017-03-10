@@ -2,9 +2,9 @@
   "name": "clear-sky-app",
   "version": "1.0.0",
   "description": "An interactive app for checking astronomical observing conditions.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "budo --live --verbose --port 3000 --open"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,18 @@
   "homepage": "https://github.com/clairefreehafer/clear-sky-app#readme",
   "dependencies": {
     "request-promise": "^4.1.1"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "browser-sync": "^2.13.0",
+    "font-awesome": "^4.6.3",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-header": "^1.8.7",
+    "gulp-less": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4",
+    "jquery": "^1.11.3",
+    "budo": "^7.0.0"
   }
 }

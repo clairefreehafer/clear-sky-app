@@ -34,7 +34,6 @@ const getLocationData = function (key) {
 		locationData.name = /title(\s*)=(\s*)\"(.*)\"/g.exec(body)[3];
 		let dataArr = body.match(/"(.*)",\s(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t/g); // array of each hour's data
 		let darknessArr = body.match(/"(.*)",\s([-\.\d]*),\s([-\.\d]*),\s([-\.\d]*)(\))/g);
-		// console.log(dataArr)
 
 		dataArr.forEach(function (data) {
 			let hourlyData = data.replace(/\s/g, '').split(','); // one array with each column its own element
@@ -54,7 +53,6 @@ const getLocationData = function (key) {
 		darknessArr.forEach(function (data, index) {
 			let darknessData = data.replace(/\s|\)/g, '').split(',');
 			let time = darknessData[0].slice(11, -1).split(':');
-			// console.log(time)
 
 			locationData.darkness.push({
 				time: [time[0], time[1], time[2]], // [HH, MM, SS];
@@ -64,6 +62,14 @@ const getLocationData = function (key) {
 			})
 		})
 		return locationData;
+		/*
+		locationData = {
+			key:
+			name:
+			conditions:
+			darkness:
+		}
+		*/
 	})
 	.catch(console.error);
 }
