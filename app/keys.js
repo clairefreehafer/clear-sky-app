@@ -1,3 +1,4 @@
+// const request = require('request-promise');
 const axios = require('axios');
 
 const locationKeysUrl = 'http://www.cleardarksky.com/t/chart_prop00.txt';
@@ -10,15 +11,16 @@ let locationKeysArr;
 let locationData = {};
 
 const	getLocationArray = function () {
-	return axios.get('locationKeysUrl')
+	return axios.get('../d3-sandbox/obs_data.tsv')
 	.then(function (body) {
 		locationKeysArr = body.split(`\n`); // 'key|location|name'
-
+		console.log(body)
 		locationKeysArr.forEach(function (element) {
 			keysArr.push(element.split('|')[0]);
 			locationArr.push(element.split('|')[1]);
 			nameArr.push(element.split('|')[2]);
 		})
+		console.log(locationArr)
 	})
 	.catch(console.error)
 }
@@ -29,7 +31,7 @@ const getLocationData = function (key) {
 	locationData.conditions = [];
 	locationData.darkness = [];
 
-	return axios.get('locationDataUrl')
+	return axios.get('../d3-sandbox/obs_data.tsv')
 	.then(function (body) {
 		locationData.name = /title(\s*)=(\s*)\"(.*)\"/g.exec(body)[3];
 		let dataArr = body.match(/"(.*)",\s(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t/g); // array of each hour's data
