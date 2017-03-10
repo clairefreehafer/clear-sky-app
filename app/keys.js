@@ -1,4 +1,4 @@
-const request = require('request-promise');
+const axios = require('axios');
 
 const locationKeysUrl = 'http://www.cleardarksky.com/t/chart_prop00.txt';
 
@@ -10,7 +10,7 @@ let locationKeysArr;
 let locationData = {};
 
 const	getLocationArray = function () {
-	return request('http://pastebin.com/raw/FzGVtrtc')
+	return axios.get('locationKeysUrl')
 	.then(function (body) {
 		locationKeysArr = body.split(`\n`); // 'key|location|name'
 
@@ -29,7 +29,7 @@ const getLocationData = function (key) {
 	locationData.conditions = [];
 	locationData.darkness = [];
 
-	return request('http://pastebin.com/raw/jegKE25p')
+	return axios.get('locationDataUrl')
 	.then(function (body) {
 		locationData.name = /title(\s*)=(\s*)\"(.*)\"/g.exec(body)[3];
 		let dataArr = body.match(/"(.*)",\s(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t(\d*),\t/g); // array of each hour's data
@@ -40,7 +40,7 @@ const getLocationData = function (key) {
 			let hour = hourlyData[0].split(':')[0] // YYYY-MM-DDHH
 
 			locationData.conditions.push({
-				time: [hour.substr(hour.length - 2, hour.length), 00, 00], // [HH, MM, SS]
+				time: [hour.substr(hour.length - 2, hour.length), 0, 0], // [HH, MM, SS]
 				clouds: hourlyData[1],
 				transparency: hourlyData[2],
 				seeing: hourlyData[3],
