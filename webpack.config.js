@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './d3-sandbox/draw.js',
+  entry: './js/draw.js',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
