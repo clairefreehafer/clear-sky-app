@@ -35761,6 +35761,7 @@ module.exports = function(module) {
 var _ = __webpack_require__(10);
 var calculator = __webpack_require__(8);
 var draw = __webpack_require__(9);
+var initMap = __webpack_require__(37).initMap;
 
 var tmonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -41664,6 +41665,29 @@ exports.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31), __webpack_require__(7)))
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var initMap = function initMap() {
+	var currentLocation = { lat: 42.8165, lng: 75.5326 };
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 4,
+		center: currentLocation
+	});
+	var marker = new google.maps.Marker({
+		position: currentLocation,
+		map: map
+	});
+};
+
+module.exports = {
+	initMap: initMap
+};
 
 /***/ })
 /******/ ]);

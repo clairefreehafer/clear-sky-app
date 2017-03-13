@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const calculator = require('./calculator');
 const draw = require('./draw');
+const initMap = require('./map').initMap;
 
 var tmonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
