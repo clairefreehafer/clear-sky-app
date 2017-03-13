@@ -1,26 +1,16 @@
 const d3 = require('d3');
-// const tipsy = require('./jquery.tipsy');
-
-const keys = require('../app/keys');
 
 const cloudColors = ['#003F7F', '#135393', '#2767A7', '#4F8FCF', '#63A3E3', '#77B7F7', '#9ADADA', '#AEEEEE', '#C2C2C2', '#EAEAEA', '#FBFBFB']
 
 const width = window.innerWidth,
 	height = 800,
-	radius = 500, // 125
+	radius = 500,
 	innerRadius = 0.3 * radius;
 
 // pie chart
 const pie = d3.pie()
 	.sort(null)
 	.value(function(d) { return 5; }); // size of each slice
-
-// const tip = d3.tip()
-//   .attr('class', 'd3-tip')
-//   .offset([0, 0]) // change location
-//   .html(function(d) {
-//     return d.data.time + ":00 - <span style='color:orangered'>" + d.data.clouds * 10 + "%</span>"; // label + value (hour)
-//   });
 
 // data signifiers
 const arc = d3.arc()
@@ -29,11 +19,6 @@ const arc = d3.arc()
 		// how far out the rays go
 		return (radius - innerRadius) * (d.data.clouds / 20.0) + innerRadius;
 	});
-
-// ray grid
-// const outlineArc = d3.arc()
-//         .innerRadius(innerRadius)
-//         .outerRadius(radius);
 
 const svg = d3.select('#chart').append('svg')
 	.attr('width', width) // cuts off graph
@@ -47,11 +32,7 @@ const tooltip = d3.select('#chart')
 	.attr('class', 'tool-tip')
 	.style('position', 'absolute')
 	.style('z-index', '20')
-	.style('visibility', 'hidden')
-	// .text(function (d) {
-	// 	console.log(d)
-	// 	return d;
-	// });
+	.style('visibility', 'hidden');
 
 d3.csv('../d3-sandbox/obs_data.csv', function(error, data) {
 
@@ -62,16 +43,7 @@ d3.csv('../d3-sandbox/obs_data.csv', function(error, data) {
 		d.clouds = +d.clouds;
 		d.time = +d.time;
 
-
-		// d.id     =  d.id;
-		// d.order  = +d.order;
-		// d.color  =  d.color;
-		// d.weight = +d.weight;
-		// d.score  = +d.score;
-		// d.width  = +d.weight;
-		// d.label  =  d.label;
 	});
-	// for (const i = 0; i < data.score; i++) { console.log(data[i].id) }
 
 	const path = svg.selectAll('.solidArc')
 		.data(pie(data))

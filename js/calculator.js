@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 
 function showLocation (longitude) {
   const currentTime = new Date();
-  // ‘Sun, 12 Mar 2017 22:41:34 GMT’
+  // 'Sun, 12 Mar 2017 22:41:34 GMT'
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // ~~~~~~~~~~ JULIAN DATE ~~~~~~~~~~
