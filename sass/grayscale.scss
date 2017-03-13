@@ -172,6 +172,7 @@ a {
 		-webkit-transition: background .3s ease-in-out;
 		-moz-transition: background .3s ease-in-out;
 		transition: background .3s ease-in-out;
+		width: 300px;
 		&:hover,
 		&:focus {
 				outline: none;
@@ -254,12 +255,13 @@ a {
 		margin-top: 500px;
 		padding-top: 500px;
 		display: inline-block;
-		position: absolute;
+		position: relative;
 }
 
 @media(min-width:767px) {
 		.content-section {
-				padding-top: 250px;
+				padding-top: 100px;
+				padding-bottom: 100px;
 		}
 
 		.download-section {
@@ -289,12 +291,13 @@ a {
 .btn-default {
 		border: 1px solid $primary;
 		color: $primary;
-		background-color: transparent;
+		background-color: white;
+		border-radius: 3px;
 		&:hover,
 		&:focus {
 				border: 1px solid $primary;
 				outline: none;
-				color: black;
+				color: white;
 				background-color: $primary;
 		}
 }
@@ -321,6 +324,7 @@ footer {
 		p {
 				margin: 0;
 		}
+		display: block;
 }
 
 ::-moz-selection {
@@ -448,12 +452,19 @@ svg {
 	top: 0;
 }
 
-#about {
-	padding-top: 0px;
-}
-
 #location-select {
-	color: white;
-	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: white;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: auto;
 }
 
+.bootstrap-select {
+	width: 500px !important;
+}
+
+div.dropdown-menu.open {
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#select-location {
+}
