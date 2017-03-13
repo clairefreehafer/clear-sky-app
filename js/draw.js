@@ -1,22 +1,21 @@
 const d3 = require('d3');
+// const tipsy = require('./jquery.tipsy');
 
-var keys = require('../app/keys');
-
-console.log(keys.getLocationData('DrkArtsObNY'))
+const keys = require('../app/keys');
 
 const cloudColors = ['#003F7F', '#135393', '#2767A7', '#4F8FCF', '#63A3E3', '#77B7F7', '#9ADADA', '#AEEEEE', '#C2C2C2', '#EAEAEA', '#FBFBFB']
 
-var width = window.innerWidth,
+const width = window.innerWidth,
 	height = 800,
 	radius = 500, // 125
 	innerRadius = 0.3 * radius;
 
 // pie chart
-var pie = d3.pie()
+const pie = d3.pie()
 	.sort(null)
 	.value(function(d) { return 5; }); // size of each slice
 
-// var tip = d3.tip()
+// const tip = d3.tip()
 //   .attr('class', 'd3-tip')
 //   .offset([0, 0]) // change location
 //   .html(function(d) {
@@ -24,7 +23,7 @@ var pie = d3.pie()
 //   });
 
 // data signifiers
-var arc = d3.arc()
+const arc = d3.arc()
 	.innerRadius(innerRadius)
 	.outerRadius(function (d) {
 		// how far out the rays go
@@ -32,18 +31,27 @@ var arc = d3.arc()
 	});
 
 // ray grid
-// var outlineArc = d3.arc()
+// const outlineArc = d3.arc()
 //         .innerRadius(innerRadius)
 //         .outerRadius(radius);
 
-var svg = d3.select('body').append('svg')
+const svg = d3.select('#chart').append('svg')
 	.attr('width', width) // cuts off graph
 	.attr('height', height) // cuts off graph
 	.attr('fill', 'white')
 	.append('g')
 	.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')'); // position
 
-// svg.call(tip); // calling this function on the group above
+const tooltip = d3.select('#chart')
+	.append('div')
+	.attr('class', 'tool-tip')
+	.style('position', 'absolute')
+	.style('z-index', '20')
+	.style('visibility', 'hidden')
+	// .text(function (d) {
+	// 	console.log(d)
+	// 	return d;
+	// });
 
 d3.csv('../d3-sandbox/obs_data.csv', function(error, data) {
 
@@ -63,9 +71,9 @@ d3.csv('../d3-sandbox/obs_data.csv', function(error, data) {
 		// d.width  = +d.weight;
 		// d.label  =  d.label;
 	});
-	// for (var i = 0; i < data.score; i++) { console.log(data[i].id) }
+	// for (const i = 0; i < data.score; i++) { console.log(data[i].id) }
 
-	var path = svg.selectAll('.solidArc')
+	const path = svg.selectAll('.solidArc')
 		.data(pie(data))
 		.enter().append('path')
 		.attr('fill', function(d) {
@@ -79,32 +87,23 @@ d3.csv('../d3-sandbox/obs_data.csv', function(error, data) {
 			d3.select(this)
 			.transition()
 			.duration(500)
-			.attr('transform', 'scale(1.2)')
+			.attr('transform', 'scale(1.1)');
+
+			return tooltip.style('visibility', 'visible')
+				.text(d.data.clouds * 10 + '% cloud cover at ' + d.data.time + ':00');
+		})
+		.on('mousemove', function () {
+			return tooltip.style('top', (event.pageY - 10) + 'px')
+				.style('left', (event.pageX + 10) + 'px');
 		})
 		.on('mouseout', function (d, i) {
 			d3.select(this)
 			.transition()
 			.duration(500)
 			.attr('transform', 'scale(1)');
+
+			return tooltip.style('visibility', 'hidden');
 		});
-
-	// var outerPath = svg.selectAll(".outlineArc")
-	//     .data(pie(data))
-	//   .enter().append("path")
-	//     .attr("fill", "red")
-	//     // .attr("stroke", "gray") // ray grid outlines
-	//     .attr("class", "outlineArc")
-
-
-
-
-	// big guy in middle
-	// svg.append('svg:text')
-	// 	.attr('id', 'chart-middle')
-	// 	// .attr('dy', '.35em')
-	// 	.attr('text-anchor', 'middle') // text-align: right
-	// 	.attr('font-size', '250px')
-	// 	.text('🌎') // observatory name
 
 });
 
